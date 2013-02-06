@@ -2,7 +2,7 @@
    TCPConnector.h
 
    TCPConnector class interface. TCPConnector provides methods to actively
-   establish TCP/IP connections with servers.
+   establish TCP/IP connections with a server.
 
    ------------------------------------------
 

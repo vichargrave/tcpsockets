@@ -2,7 +2,7 @@
    TCPAcceptor.h
 
    TCPAcceptor class interface. TCPAcceptor provides methods to passively
-   establish TCP/IP connections with client.
+   establish TCP/IP connections with clients.
 
    ------------------------------------------
 

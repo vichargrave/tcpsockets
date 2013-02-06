@@ -2,7 +2,7 @@
    server.cpp
 
    Test server for the tcpsockets classes. The app waits for connections
-   then echoes everything it recieves back to the client until the client
+   then echoes everything it receives back to the client until the client
    closes the connection. Then it waits for another connection request.
 
    ------------------------------------------
@@ -48,6 +48,7 @@ int main(int argc, char** argv)
                 size_t len;
                 char line[256];
                 while ((len = stream->receive(line, sizeof(line))) > 0) {
+                    line[len] = NULL;
                     printf("received - %s\n", line);
                     stream->send(line, len);
                 }

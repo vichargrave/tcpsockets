@@ -2,7 +2,7 @@
    TCPConnector.h
 
    TCPConnector class definition. TCPConnector provides methods to actively
-   establish TCP/IP connections with servers.
+   establish TCP/IP connections with a server.
 
    ------------------------------------------
 
@@ -30,7 +30,7 @@ TCPStream* TCPConnector::connect(const char* server, int port)
 {
     struct sockaddr_in address;
 
-    memset (&address, 0, sizeof (address));
+    memset (&address, 0, sizeof(address));
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     if (resolveHost(server, &(address.sin_addr)) != 0 ) {
@@ -40,7 +40,7 @@ TCPStream* TCPConnector::connect(const char* server, int port)
     if (::connect(sd, (struct sockaddr*)&address, sizeof(address)) != 0) {
         return NULL;
     }
-    return new TCPStream(sd);
+    return new TCPStream(sd, &address);
 }
 
 int TCPConnector::resolveHost(const char* hostname, struct in_addr* addr) 

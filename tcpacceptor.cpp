@@ -2,7 +2,7 @@
    TCPAcceptor.cpp
 
    TCPAcceptor class definition. TCPAcceptor provides methods to passively
-   establish TCP/IP connections with client.
+   establish TCP/IP connections with clients.
 
    ------------------------------------------
 
@@ -67,12 +67,11 @@ TCPStream* TCPAcceptor::accept()
     }
 
     struct sockaddr_in address;
-
     socklen_t len = sizeof(address);
     memset(&address, 0, sizeof(address));
     int sd = ::accept(m_lsd, (struct sockaddr*)&address, &len);
     if (sd < 0) {
         return NULL;
     }
-    return new TCPStream(sd);
+    return new TCPStream(sd, &address);
 }
