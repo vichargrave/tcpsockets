@@ -24,8 +24,8 @@
 #ifndef __tcpacceptor_h__
 #define __tcpacceptor_h__
 
-#include <netinet/in.h>
 #include <string>
+#include <netinet/in.h>
 #include "tcpstream.h"
 
 using namespace std;
