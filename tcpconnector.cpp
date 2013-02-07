@@ -33,7 +33,7 @@ TCPStream* TCPConnector::connect(const char* server, int port)
     memset (&address, 0, sizeof(address));
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
-    if (resolveHost(server, &(address.sin_addr)) != 0 ) {
+    if (resolveHostName(server, &(address.sin_addr)) != 0 ) {
         inet_pton(PF_INET, server, &(address.sin_addr));        
     } 
     int sd = socket(AF_INET, SOCK_STREAM, 0);
@@ -43,17 +43,14 @@ TCPStream* TCPConnector::connect(const char* server, int port)
     return new TCPStream(sd, &address);
 }
 
-int TCPConnector::resolveHost(const char* hostname, struct in_addr* addr) 
+int TCPConnector::resolveHostName(const char* hostname, struct in_addr* addr) 
 {
-    struct addrinfo hints, *res;
+    struct addrinfo *res;
   
-    memset (&hints, 0, sizeof (hints));
-    hints.ai_family = PF_UNSPEC;
-    hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags |= AI_CANONNAME;
-    int result = getaddrinfo (hostname, NULL, &hints, &res);
+    int result = getaddrinfo (hostname, NULL, NULL, &res);
     if (result == 0) {
         memcpy(addr, &((struct sockaddr_in *) res->ai_addr)->sin_addr, sizeof(struct in_addr));
+        freeaddrinfo(res);
     }
     return result;
 }

@@ -30,13 +30,10 @@
 class TCPConnector
 {
   public:
-    TCPConnector() {}
-    ~TCPConnector() {}
-
     TCPStream* connect(const char* server, int port);
     
   private:
-    int resolveHost(const char* host, struct in_addr* addr);
+    int resolveHostName(const char* host, struct in_addr* addr);
 };
 
 #endif
