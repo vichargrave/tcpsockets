@@ -53,10 +53,16 @@ int TCPAcceptor::start()
         address.sin_addr.s_addr = INADDR_ANY;
     }
     int result = bind(m_lsd, (struct sockaddr*)&address, sizeof(address));
-    if (result == 0) {
-        result = listen(m_lsd, 5);
-        m_listening = true;
+    if (result != 0) {
+        perror("bind() failed");
+        return result;
     }
+    result = listen(m_lsd, 5);
+    if (result != 0) {
+        perror("listen() failed");
+        return result;
+    }
+    m_listening = true;
     return result;
 }
 
@@ -71,6 +77,7 @@ TCPStream* TCPAcceptor::accept()
     memset(&address, 0, sizeof(address));
     int sd = ::accept(m_lsd, (struct sockaddr*)&address, &len);
     if (sd < 0) {
+        perror("accept() failed");
         return NULL;
     }
     return new TCPStream(sd, &address);
