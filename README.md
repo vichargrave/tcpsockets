@@ -1,7 +1,7 @@
 tcpsockets
 ==========
 
-TCP/IP Network Programming Classes in C++
+Example source code for the article 'TCP/IP Network Programming Design Patterns in C++'
 
 Build
 =====
