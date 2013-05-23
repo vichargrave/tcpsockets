@@ -21,6 +21,8 @@
    limitations under the License.
 */
 
+#include <stdio.h>
+#include <string.h>
 #include <arpa/inet.h>
 #include "tcpacceptor.h"
 
