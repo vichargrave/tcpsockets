@@ -54,11 +54,16 @@ int TCPAcceptor::start()
     else {
         address.sin_addr.s_addr = INADDR_ANY;
     }
+    
+    int optval = 1;
+    setsockopt(m_lsd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval); 
+    
     int result = bind(m_lsd, (struct sockaddr*)&address, sizeof(address));
     if (result != 0) {
         perror("bind() failed");
         return result;
     }
+    
     result = listen(m_lsd, 5);
     if (result != 0) {
         perror("listen() failed");
