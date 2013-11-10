@@ -52,6 +52,7 @@ int main(int argc, char** argv)
                     printf("received - %s\n", line);
                     stream->send(line, len);
                 }
+                delete stream;
             }
         }
     }
