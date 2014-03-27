@@ -7,12 +7,10 @@ Build
 =====
 
 1. cd to the 'tcpsockets' directory.
-1. Build the test client by typing 'make -f Makefile.client'.
-2. Build the test server by typing 'make -f Makefile.server'.
-3. Alternatively build both by just typing 'make'.
+2. Type 'make' to build all the clients and servers
 
-Run
-===
+Run client and server
+=====================
 
 1. Type 'server <port> [<ip>]' where <ip> is the IP address of
    the network interface where you want to listen for and accept
@@ -23,3 +21,18 @@ Run
 
 NOTE: If you are running client and server on the same system you
       can just use 'localhost' for <ip>.
+
+Run client and server with time out
+===================================
+
+1. Type 'server_pause <pause port>' to start a server that binds
+   to any IP address and the pasue port you specify, but never
+   listens for connection resuests.
+2. Type 'server_timeout <time out port> [<ip>]' to start a server that 
+   listens for connections and receives requests bu never replies.
+3. To test connect and receive time outs, run client_timeout by typing
+   'connect_timeout <pause port> <time out port> <ip> <time out>' where
+   <pause port> is the port from step 1, <time out port> is the port
+   from step 2, <ip> is the IP address from step 2 and <time out> is
+   the number of seconds to wait on a connect or receive operation 
+   before timing out.
