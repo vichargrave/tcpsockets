@@ -3,7 +3,7 @@
 
    Test server for the time out capabilties of the TCPStream class.  This 
    server accepts connections and receive requests but never sends any replies.
-   Use it to cause receive time out in client_timeout.
+   Use it to test receive time out in client_timeout.
 
    ------------------------------------------
 

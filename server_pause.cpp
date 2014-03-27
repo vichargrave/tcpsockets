@@ -3,7 +3,7 @@
 
    Test server for the time out capabilties of the TCPConnector class.  This 
    server will bind to a given IP address and TCP port but never start listening.  
-   Use it to cause connect attempts to time out in client_timeout.  
+   Use it to test connect time outs in client_timeout.  
   
    ------------------------------------------
 

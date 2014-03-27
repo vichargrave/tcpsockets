@@ -4,9 +4,10 @@
    Test client for the tcpsockets classes. Use this program to test connect
    and receive time out capabilties.  Start the server_pause on one port and
    the server_timeout on the other.  Then run client_timeout specifying the
-   server_pause and server_timeout ports.  This client will time out trying 
-   connect to server_pause, which never accepts connections, and trying to
-   receive a response from server_timeout, which never replies to any request.
+   server_pause and server_timeout ports.  The client will time out trying
+   to connect to server_pause, which never accepts connections.  The client
+   will then time out waiting for a reply from server_timeout which never 
+   replies to clients.
 
    ------------------------------------------
 
