@@ -6,7 +6,7 @@
 
    ------------------------------------------
 
-   Copyright Â© 2013 [Vic Hargrave - http://vichargrave.com]
+   Copyright © 2013 [Vic Hargrave - http://vichargrave.com]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ class TCPStream
     int     m_sd;
     string  m_peerIP;
     int     m_peerPort;
-
   public:
     friend class TCPAcceptor;
     friend class TCPConnector;
@@ -44,12 +43,20 @@ class TCPStream
     ~TCPStream();
 
     ssize_t send(const char* buffer, size_t len);
-    ssize_t receive(char* buffer, size_t len);
+    ssize_t receive(char* buffer, size_t len, int timeout=0);
 
     string getPeerIP();
     int    getPeerPort();
 
+    enum {
+        connectionClosed = 0,
+        connectionReset = -1,
+        connectionTimedOut = -2
+    };
+
   private:
+    bool waitForReadEvent(int timeout);
+    
     TCPStream(int sd, struct sockaddr_in* address);
     TCPStream();
     TCPStream(const TCPStream& stream);

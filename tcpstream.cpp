@@ -6,7 +6,7 @@
 
    ------------------------------------------
 
-   Copyright Â© 2013 [Vic Hargrave - http://vichargrave.com]
+   Copyright © 2013 [Vic Hargrave - http://vichargrave.com]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -41,16 +41,40 @@ ssize_t TCPStream::send(const char* buffer, size_t len)
     return write(m_sd, buffer, len);
 }
 
-ssize_t TCPStream::receive(char* buffer, size_t len) 
+ssize_t TCPStream::receive(char* buffer, size_t len, int timeout) 
 {
-    return read(m_sd, buffer, len);
+    if (timeout <= 0) return read(m_sd, buffer, len);
+
+    if (waitForReadEvent(timeout) == true)
+    {
+        return read(m_sd, buffer, len);
+    }
+    return connectionTimedOut;
+
 }
 
-string TCPStream::getPeerIP() {
+string TCPStream::getPeerIP() 
+{
     return m_peerIP;
 }
 
-int TCPStream::getPeerPort() {
+int TCPStream::getPeerPort() 
+{
     return m_peerPort;
 }
 
+bool TCPStream::waitForReadEvent(int timeout)
+{
+    fd_set sdset;
+    struct timeval tv;
+
+    tv.tv_sec = timeout;
+    tv.tv_usec = 0;
+    FD_ZERO(&sdset);
+    FD_SET(m_sd, &sdset);
+    if (select(m_sd+1, &sdset, NULL, NULL, &tv) > 0)
+    {
+        return true;
+    }
+    return false;
+}

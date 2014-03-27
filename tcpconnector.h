@@ -6,7 +6,7 @@
 
    ------------------------------------------
 
-   Copyright Â© 2013 [Vic Hargrave - http://vichargrave.com]
+   Copyright © 2013 [Vic Hargrave - http://vichargrave.com]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ class TCPConnector
 {
   public:
     TCPStream* connect(const char* server, int port);
+    TCPStream* connect(const char* server, int port, int timeout);
     
   private:
     int resolveHostName(const char* host, struct in_addr* addr);

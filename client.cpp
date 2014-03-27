@@ -5,7 +5,7 @@
 
    ------------------------------------------
 
-   Copyright Â© 2013 [Vic Hargrave - http://vichargrave.com]
+   Copyright © 2013 [Vic Hargrave - http://vichargrave.com]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
         stream->send(message.c_str(), message.size());
         printf("sent - %s\n", message.c_str());
         len = stream->receive(line, sizeof(line));
-        line[len] = NULL;
+        line[len] = 0;
         printf("received - %s\n", line);
         delete stream;
     }
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
         stream->send(message.c_str(), message.size());
         printf("sent - %s\n", message.c_str());
         len = stream->receive(line, sizeof(line));
-        line[len] = NULL;
+        line[len] = 0;
         printf("received - %s\n", line);
         delete stream;
     }

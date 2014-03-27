@@ -1,8 +1,9 @@
 /*
    server.cpp
 
-   Test server for the tcpsockets classes which handles connections
-   iteratively.
+   Test server for the time out capabilties of the TCPStream class.  This 
+   server accepts connections and receive requests but never sends any replies.
+   Use it to cause receive time out in client_timeout.
 
    ------------------------------------------
 
@@ -47,10 +48,8 @@ int main(int argc, char** argv)
                 ssize_t len;
                 char line[256];
                 while ((len = stream->receive(line, sizeof(line))) > 0) {
-                    line[len] = 0;
-                    printf("received - %s\n", line);
-                    stream->send(line, len);
                 }
+                printf("connection closed\n");
                 delete stream;
             }
         }
