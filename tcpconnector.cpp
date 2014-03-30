@@ -89,7 +89,7 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
                     fprintf(stderr, "connect() error %d - %s\n", valopt, strerror(valopt));
                 }
                 // connection established
-                result = 0;
+                else result = 0;
             }
             else fprintf(stderr, "connect() timed out\n");
         }

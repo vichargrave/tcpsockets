@@ -28,7 +28,6 @@
 #include <stdlib.h>
 #include "tcpacceptor.h"
 
-
 int main(int argc, char** argv)
 {
     int lsd = socket(PF_INET, SOCK_STREAM, 0);

@@ -36,6 +36,7 @@ class TCPStream
     int     m_sd;
     string  m_peerIP;
     int     m_peerPort;
+
   public:
     friend class TCPAcceptor;
     friend class TCPConnector;
