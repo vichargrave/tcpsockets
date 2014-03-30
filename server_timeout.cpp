@@ -47,8 +47,7 @@ int main(int argc, char** argv)
             if (stream != NULL) {
                 ssize_t len;
                 char line[256];
-                while ((len = stream->receive(line, sizeof(line))) > 0) {
-                }
+                while ((len = stream->receive(line, sizeof(line))) > 0);
                 printf("connection closed\n");
                 delete stream;
             }
