@@ -39,9 +39,16 @@ TCPStream* TCPConnector::connect(const char* server, int port)
     if (resolveHostName(server, &(address.sin_addr)) != 0 ) {
         inet_pton(PF_INET, server, &(address.sin_addr));        
     } 
+
+    // Create and connect the socket, bail if we fail in either case
     int sd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sd < 0) {
+        perror("socket() failed");
+        return NULL;
+    }
     if (::connect(sd, (struct sockaddr*)&address, sizeof(address)) != 0) {
         perror("connect() failed");
+        close(sd);
         return NULL;
     }
     return new TCPStream(sd, &address);
@@ -66,6 +73,12 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
     socklen_t len;
     int result = -1, valopt, sd = socket(AF_INET, SOCK_STREAM, 0);
     
+    // Bail if we fail to create the socket
+    if (sd < 0) {
+        perror("socket() failed");
+        return NULL;
+    }    
+
     // Set socket to non-blocking
     arg = fcntl(sd, F_GETFL, NULL);
     arg |= O_NONBLOCK;
