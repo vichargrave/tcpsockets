@@ -94,7 +94,11 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
             tv.tv_usec = 0;
             FD_ZERO(&sdset);
             FD_SET(sd, &sdset);
-            if (select(sd+1, NULL, &sdset, NULL, &tv) > 0)
+            int s = -1;
+            do {
+                s = select(sd + 1, NULL, &sdset, NULL, &tv);
+            } while (s == -1 && errno == EINTR);
+            if (s > 0)
             {
                 len = sizeof(int);
                 getsockopt(sd, SOL_SOCKET, SO_ERROR, (void*)(&valopt), &len);
