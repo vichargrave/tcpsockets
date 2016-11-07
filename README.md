@@ -1,6 +1,6 @@
 # tcpsockets
 
-Example source code for the article [TCP/IP Network Programming Design Patterns in C++](http://vichargrave.com/network-programming-design-patterns-in-c/) and [TCP/IP Sockets with Time Out Capabilities](http://vichargrave.com/network-programming-design-patterns-in-c/).
+Example source code from my TCP/IP Network Programming Design Patterns in C++ and TCP/IP Sockets with Time Out Capabilities blogs.
 
 ## Build
 
