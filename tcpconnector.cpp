@@ -108,9 +108,17 @@ TCPStream* TCPConnector::connect(const char* server, int port, int timeout)
                 // connection established
                 else result = 0;
             }
-            else fprintf(stderr, "connect() timed out\n");
+            else
+	    {
+		close(sd);
+		fprintf(stderr, "connect() timed out\n");
+	    }
         }
-        else fprintf(stderr, "connect() error %d - %s\n", errno, strerror(errno));
+        else
+	{
+	    close(sd);
+	    fprintf(stderr, "connect() error %d - %s\n", errno, strerror(errno));
+	}
     }
 
     // Return socket to blocking mode 
