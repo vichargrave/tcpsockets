@@ -1,3 +1,5 @@
+# Makes the tcpsocket lib
+
 all:
 	make -f Makefile.client
 	make -f Makefile.client_timeout
